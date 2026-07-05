@@ -1049,7 +1049,7 @@ const educationItems = [
     {
         type: "academic",
         title: "Diploma in Computer Technology",
-        institution: "HABHIT (Haji Abul Hossain institute and Technology)",
+        institution: "HABHIT (Haji Abul Hossain Institute of Technology)",
         cgpa: "3.71 / 4.00",
         highlight: "Computer Engineering fundamentals"
     },
