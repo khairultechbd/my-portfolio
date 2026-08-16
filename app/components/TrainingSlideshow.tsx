@@ -3,10 +3,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const images = [
   "/all-photo/police-training-photo/1.jpg",
@@ -76,23 +77,31 @@ export default function TrainingSlideshow() {
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           <Swiper
-            modules={[Autoplay, Pagination, EffectFade]}
+            modules={[Autoplay, Pagination, EffectFade, Navigation]}
             effect="fade"
             fadeEffect={{ crossFade: true }}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
+            navigation
             loop
-            className="w-full rounded-2xl overflow-hidden"
+            className="training-swiper w-full max-w-[800px] mx-auto rounded-2xl overflow-hidden"
           >
             {images.map((src, i) => (
               <SwiperSlide key={src}>
-                <div className="relative w-full h-[300px] sm:h-[400px] md:h-[450px]">
+                {/* All 6 source photos are exactly 4:3 (checked with `sips`),
+                    so locking the box to aspect-[4/3] instead of a fixed
+                    px height per breakpoint means the box always matches
+                    the photo's real ratio — no cropping at ANY viewport
+                    width, including odd cases like "Desktop site" mode on
+                    a phone (which previously picked a breakpoint height
+                    meant for a much wider box and cropped heads off). */}
+                <div className="relative w-full aspect-[4/3]">
                   <Image
                     src={src}
                     alt={`Police training session ${i + 1}`}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 1280px"
+                    style={{ objectFit: "cover", objectPosition: "top center" }}
+                    sizes="(max-width: 768px) 100vw, 800px"
                   />
                 </div>
               </SwiperSlide>
