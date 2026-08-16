@@ -6,12 +6,14 @@ import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
-  { label: "Home",     id: "home"     },
-  { label: "About",    id: "about"    },
-  { label: "Skills",   id: "skills"   },
-  { label: "Projects", id: "projects" },
-  { label: "Blog",     id: "blog"     },
-  { label: "Contact",  id: "contact"  },
+  { label: "Home",      id: "home"      },
+  { label: "Training",  id: "training"  },
+  { label: "About",     id: "about"     },
+  { label: "Qualifications", id: "education" },
+  { label: "Skills",    id: "skills"    },
+  { label: "Projects",  id: "projects"  },
+  // "Blog" nav link removed while BlogSection is disabled (no real posts yet).
+  { label: "Contact",   id: "contact"   },
 ];
 
 export default function Navbar() {

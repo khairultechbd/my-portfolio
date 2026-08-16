@@ -9,8 +9,8 @@ import { GraduationCap, Briefcase, Shield } from "lucide-react";
 const stats = [
   { label: "CGPA", value: 3.82, suffix: "", decimals: 2, sub: "" },
   { label: "Work Experience", value: 6, suffix: " Months", decimals: 0, sub: "IT Bangladesh" },
-  { label: "Training Delivered", value: 40, suffix: " Days", decimals: 0, sub: "Rajarbagh Police HQ" },
-  { label: "IsDB Scholarship", value: 6, suffix: " Months", decimals: 0, sub: "Network & System Administrator" },
+  { label: "Training Delivered", value: 40, suffix: " Days", decimals: 0, sub: "Rajarbagh Police Lines" },
+  { label: "IsDB Scholarship", value: 6, suffix: " Months", decimals: 0, sub: "Network System Administration" },
 ];
 
 // ---------- EDUCATION DATA ----------
@@ -20,6 +20,7 @@ type EducationItem = {
   institution: string;
   location?: string;
   duration?: string;
+  year?: string;
   badge?: string;
   cgpa?: string;
   highlight?: string;
@@ -34,20 +35,22 @@ const educationItems: EducationItem[] = [
     type: "academic",
     title: "B.Sc. in Computer Science & Engineering (CSE)",
     institution: "Bangladesh University of Business and Technology (BUBT)",
-    cgpa: "3.82 / 4.00",
+    cgpa: "CGPA: 3.82 / 4.00",
+    year: "2026",
     highlight: "Strong focus on networking, security, and AI research",
   },
   {
     type: "academic",
     title: "Diploma in Computer Technology",
     institution: "HABHIT (Haji Abul Hossain Institute of Technology)",
-    cgpa: "3.71 / 4.00",
-    highlight: "Computer Engineering fundamentals",
+    cgpa: "CGPA: 3.71 / 4.00",
+    year: "2021",
+    highlight: "Computer Engineering fundamentals (BTEB board)",
   },
   // ── Professional Training / Work (shown in Professional Training tab) ──
   {
     type: "work",
-    title: "Jr. System & Network Engineer",
+    title: "Junior Network Engineer",
     institution: "IT Bangladesh",
     location: "Dhaka, Bangladesh",
     duration: "6 Months (Professional Employment)",
@@ -55,7 +58,7 @@ const educationItems: EducationItem[] = [
     details: [
       "Managed and maintained enterprise network infrastructure",
       "Configured and troubleshot MikroTik routers and switches",
-      "Administered Windows Server 2019 (AD, DNS, DHCP)",
+      "Administered Windows Server 2016 (AD, DNS, DHCP)",
       "Provided system support and ensured network uptime",
       "Worked on real-world client network deployments",
       "Troubleshoot and resolved network connectivity issues ",
@@ -64,8 +67,8 @@ const educationItems: EducationItem[] = [
   },
     {
     type: "training",
-    title: "Field Experience — Assistant Trainer",
-    institution: "Rajarbagh Police Headquarters, Dhaka",
+    title: "Field Experience: Assistant Trainer",
+    institution: "Rajarbagh Police Lines, Dhaka",
     duration: "40 Days",
     focus: [
       "Computer Hardware fundamentals",
@@ -77,19 +80,19 @@ const educationItems: EducationItem[] = [
   },
   {
     type: "training",
-    title: "IT Scholarship — Network & System Administration",
+    title: "Diploma in Network System Administration",
     institution:
-      "IsDB-BISEW (Islamic Development Bank — Bangladesh Institute of Skills Enhancement & Workforce)",
-    duration: "6 Months(460 Hours) Training",
+      "IsDB-BISEW (Islamic Development Bank, Bangladesh Islamic Solidarity Educational Wakf)",
+    duration: "6 Months (460 Hours) Training",
     focus: [
       "Completed intensive hands-on training in Network Design & Administration",
       "Practiced MikroTik Router & Switch configuration in lab environment",
-      "Trained on Cisco Routing & Switching — OSPF, EIGRP, VLANs",
-      "Hands-on labs: Windows Server 2019 (AD, DNS, DHCP, GPO)",
+      "Trained on Cisco Routing & Switching: OSPF, EIGRP, VLANs",
+      "Hands-on labs: Windows Server 2016 (AD, DNS, DHCP, GPO)",
       "Virtualization labs: VMware, Hyper-V, VirtualBox",
       "Studied Network Security & Firewall Management concepts",
     ],
-    note: "Competitive government-backed scholarship — selected from national applicants across Bangladesh",
+    note: "Competitive government-backed scholarship, selected from national applicants across Bangladesh",
   },
 
 ];
@@ -142,28 +145,29 @@ function AnimatedCounter({
 function EducationCard({ item }: { item: EducationItem }) {
   const isWork = item.type === "work";
   const isTraining = item.type === "training";
-  const isAcademic = item.type === "academic";
 
-  // Per-type colour tokens
+  // Per-type colour tokens. Institution/duration text uses the theme-aware
+  // --accent-* vars (dark, WCAG-AA text in light mode; pastel in dark mode)
+  // instead of a fixed hex, so it stays readable in both themes — see
+  // CV/UIUX_Expert_Audit.md for the contrast measurements that drove this.
   const borderColor = isWork ? "#22c55e" : isTraining ? "#7c3aed" : "#2563eb";
   const iconBg = isWork
     ? "rgba(34, 197, 94, 0.15)"
     : isTraining
     ? "rgba(124, 58, 237, 0.15)"
     : "rgba(37, 99, 235, 0.15)";
-  const iconColor = isWork ? "#4ade80" : isTraining ? "#a78bfa" : "#60a5fa";
-  const institutionColor = isWork ? "#4ade80" : isTraining ? "#a78bfa" : "#60a5fa";
-  const shadowColor = isWork
-    ? "0 4px 20px rgba(34, 197, 94, 0.14)"
+  const iconColor = isWork
+    ? "var(--accent-green)"
     : isTraining
-    ? "0 4px 20px rgba(124, 58, 237, 0.12)"
-    : "0 4px 20px rgba(37, 99, 235, 0.10)";
+    ? "var(--accent-purple)"
+    : "var(--accent-blue)";
+  const institutionColor = iconColor;
   const durationBg = isWork
     ? "rgba(34,197,94,0.12)"
     : isTraining
     ? "rgba(124,58,237,0.15)"
     : "rgba(37,99,235,0.12)";
-  const durationColor = isWork ? "#86efac" : isTraining ? "#c4b5fd" : "#93c5fd";
+  const durationColor = iconColor;
   const bulletColor = isWork ? "#22c55e" : isTraining ? "#a78bfa" : "#3b82f6";
 
   return (
@@ -256,14 +260,28 @@ function EducationCard({ item }: { item: EducationItem }) {
           <span
             style={{
               background: "rgba(37,99,235,0.12)",
-              color: "#93c5fd",
+              color: "var(--accent-blue)",
               borderRadius: "999px",
               padding: "2px 10px",
               fontSize: "0.78rem",
               fontWeight: 600,
             }}
           >
-            🎓 CGPA: {item.cgpa}
+            🎓 {item.cgpa}
+          </span>
+        )}
+        {item.year && (
+          <span
+            style={{
+              background: "var(--skill-badge-bg)",
+              color: "var(--text-muted)",
+              borderRadius: "999px",
+              padding: "2px 10px",
+              fontSize: "0.78rem",
+              fontWeight: 600,
+            }}
+          >
+            📅 {item.year}
           </span>
         )}
       </div>
@@ -358,7 +376,6 @@ function EducationCard({ item }: { item: EducationItem }) {
 export default function AboutSection() {
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
-  const [activeTab, setActiveTab] = useState<"academic" | "training">("training");
 
   const academicItems = educationItems.filter((e) => e.type === "academic");
   // Professional Training tab shows work first, then training (order preserved from data array)
@@ -426,16 +443,19 @@ export default function AboutSection() {
               About Me
             </h2>
             <p className="leading-relaxed mb-6" style={{ color: "var(--text-muted)" }}>
-              I am a System &amp; Network Engineer with a strong foundation in
-              computer science and practical experience building enterprise IT
-              infrastructure. From configuring MikroTik routers to training law
-              enforcement personnel, I bring a hands-on approach to every
-              challenge.
+              I studied Computer Science &amp; Engineering at BUBT, but most of
+              what I know about networking came from hands-on work:
+              configuring MikroTik and Cisco gear, administering Windows
+              Server, and fixing real infrastructure problems at IT
+              Bangladesh.
             </p>
             <p className="leading-relaxed" style={{ color: "var(--text-muted)" }}>
-              Completed a competitive 6-month IsDB-BISEW IT Scholarship in
-              Network &amp; System Administration, and delivered 40-day hands-on
-              IT training at Rajarbagh Police HQ, Dhaka.
+              I&apos;ve also trained others, including a 40-day IT program for
+              Bangladesh Police personnel, and worked on a deep learning
+              project using GANs for image denoising in my final year.
+              I&apos;m currently looking for a Network Engineer, IT Support, or
+              IT Officer role where I can keep building on both the academic
+              and the practical side.
             </p>
           </motion.div>
         </div>
@@ -478,7 +498,8 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{ marginTop: "5rem" }}
+          id="education"
+          style={{ marginTop: "5rem", scrollMarginTop: "80px" }}
         >
           {/* Section heading */}
           <div style={{ textAlign: "center", marginBottom: "2rem" }}>
@@ -497,98 +518,59 @@ export default function AboutSection() {
             </p>
           </div>
 
-          {/* Tab switcher */}
+          {/* Two columns, both always visible — no tab click needed to see either */}
           <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "0.75rem",
-              marginBottom: "2rem",
-            }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-10"
+            style={{ maxWidth: "1100px", margin: "0 auto" }}
           >
-            {/* Professional Qualification — LEFT */}
-            <button
-              type="button"
-              onClick={() => setActiveTab("training")}
-              style={{
-                padding: "0.5rem 1.5rem",
-                borderRadius: "999px",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                cursor: "pointer",
-                border: "none",
-                transition: "all 0.25s",
-                background: activeTab === "training" ? "#7c3aed" : "var(--bg-card)",
-                color: activeTab === "training" ? "#fff" : "var(--text-muted)",
-                boxShadow: activeTab === "training" ? "0 4px 14px rgba(124,58,237,0.4)" : "none",
-              }}
-            >
-              🛡️ Professional Qualification
-            </button>
-            {/* Academic — RIGHT */}
-            <button
-              type="button"
-              onClick={() => setActiveTab("academic")}
-              style={{
-                padding: "0.5rem 1.5rem",
-                borderRadius: "999px",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                cursor: "pointer",
-                border: "none",
-                transition: "all 0.25s",
-                background: activeTab === "academic" ? "#2563eb" : "var(--bg-card)",
-                color: activeTab === "academic" ? "#fff" : "var(--text-muted)",
-                boxShadow: activeTab === "academic" ? "0 4px 14px rgba(37,99,235,0.4)" : "none",
-              }}
-            >
-              🎓 Academic
-            </button>
-          </div>
-
-          {/* Cards */}
-          <div style={{ maxWidth: "860px", margin: "0 auto" }}>
-            {activeTab === "academic"
-              ? academicItems.map((item) => (
-                  <EducationCard key={item.title} item={item} />
-                ))
-              : trainingItems.map((item) => (
-                  <EducationCard key={item.title} item={item} />
-                ))}
-          </div>
-
-          {/* Both tabs shown for quick context (always visible summary) */}
-          <div
-            style={{
-              maxWidth: "860px",
-              margin: "1.5rem auto 0",
-              display: "flex",
-              gap: "1rem",
-              flexWrap: "wrap" as const,
-              justifyContent: "space-between",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                color: "#a78bfa",
-                fontSize: "0.8rem",
-              }}
-            >
-              <Briefcase size={14} /> Professional Experience &amp; Training: {trainingItems.length} entries
+            {/* Professional Qualification column — shown first, most visitors look for this first */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "1.25rem" }}>
+                <Shield size={20} color="#a78bfa" />
+                <h3 style={{ color: "var(--text-primary)", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+                  🛡️ Professional Qualification
+                </h3>
+                <span
+                  style={{
+                    background: "rgba(124,58,237,0.15)",
+                    color: "#c4b5fd",
+                    borderRadius: "999px",
+                    padding: "1px 9px",
+                    fontSize: "0.72rem",
+                    fontWeight: 700,
+                  }}
+                >
+                  {trainingItems.length}
+                </span>
+              </div>
+              {trainingItems.map((item) => (
+                <EducationCard key={item.title} item={item} />
+              ))}
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                color: "#60a5fa",
-                fontSize: "0.8rem",
-              }}
-            >
-              <GraduationCap size={14} /> Academic: {academicItems.length} entries
+
+            {/* Academic column */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "1.25rem" }}>
+                <GraduationCap size={20} color="#60a5fa" />
+                <h3 style={{ color: "var(--text-primary)", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+                  🎓 Academic
+                </h3>
+                <span
+                  style={{
+                    background: "rgba(37,99,235,0.12)",
+                    color: "#93c5fd",
+                    borderRadius: "999px",
+                    padding: "1px 9px",
+                    fontSize: "0.72rem",
+                    fontWeight: 700,
+                  }}
+                >
+                  {academicItems.length}
+                </span>
+              </div>
+              {academicItems.map((item) => (
+                <EducationCard key={item.title} item={item} />
+              ))}
             </div>
           </div>
         </motion.div>

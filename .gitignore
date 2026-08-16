@@ -11,6 +11,9 @@ node_modules/
 # Production build
 /build
 
+# Private CV files
+/CV/
+
 # Environment variables — NEVER commit these
 .env
 .env.local

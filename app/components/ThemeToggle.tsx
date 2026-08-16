@@ -1,14 +1,24 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import { Sun, Moon, Monitor } from 'lucide-react'
+
+// Detects whether we've hydrated on the client, without the cascading
+// re-render that a useEffect + setState mount-guard would cause.
+const emptySubscribe = () => () => {}
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  )
+}
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const mounted = useMounted()
 
-  useEffect(() => setMounted(true), [])
   if (!mounted) return null
 
   const themes = [

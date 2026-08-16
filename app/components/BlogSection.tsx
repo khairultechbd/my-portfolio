@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 const posts = [
   {
-    title: "MikroTik PPPoE Server — Step by Step Configuration Guide",
+    title: "MikroTik PPPoE Server: Step by Step Configuration Guide",
     date: "July 2026",
   },
   {
@@ -13,7 +13,7 @@ const posts = [
     date: "July 2026",
   },
   {
-    title: "OSI Model — Real World Network Troubleshooting এ কিভাবে কাজে লাগে?",
+    title: "OSI Model: Real World Network Troubleshooting এ কিভাবে কাজে লাগে?",
     date: "July 2026",
   },
 ];

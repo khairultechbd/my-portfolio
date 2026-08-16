@@ -10,22 +10,21 @@ const projects = [
     description:
       "University capstone project using Generative Adversarial Networks on the CelebA dataset. Achieved above-threshold PSNR and SSIM scores for denoising module. Built entirely on Kaggle GPU.",
     links: [
-      { label: "GitHub", href: "#", icon: "github" },
-      { label: "Live Demo", href: "#", icon: "external" },
+      { label: "GitHub", href: "https://github.com/khairultechbd", icon: "github" },
     ],
   },
   {
-    title: "Network Infrastructure Lab — MikroTik & Cisco",
+    title: "Network Infrastructure Lab: MikroTik & Cisco",
     tags: ["MikroTik", "Cisco", "GNS3", "VLAN", "OSPF"],
     description:
       "Designed and simulated enterprise network topology with VLAN segmentation, OSPF routing, and MikroTik PPPoE server configuration.",
-    links: [{ label: "GitHub", href: "#", icon: "github" }],
+    links: [{ label: "GitHub", href: "https://github.com/khairultechbd", icon: "github" }],
   },
   {
     title: "Police IT Training Program",
     tags: ["Training", "Networking", "Hardware", "Security"],
     description:
-      "Designed and delivered 40-day hands-on IT training curriculum for law enforcement personnel at Rajarbagh Police HQ, covering hardware, networking, and cybersecurity fundamentals.",
+      "Designed and delivered 40-day hands-on IT training curriculum for law enforcement personnel at Rajarbagh Police Lines, covering hardware, networking, and cybersecurity fundamentals.",
     links: [{ label: "View Photos", href: "#training", icon: "photos" }],
   },
 ];
@@ -48,11 +47,14 @@ function ProjectLink({
 
   const Icon =
     icon === "github" ? Github : icon === "photos" ? Images : ExternalLink;
+  const isExternal = !href.startsWith("#");
 
   return (
     <a
       href={href}
       onClick={handleClick}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className="inline-flex items-center gap-1.5 text-sm text-blue-400 hover:text-sky-400 transition-colors"
     >
       <Icon size={16} />

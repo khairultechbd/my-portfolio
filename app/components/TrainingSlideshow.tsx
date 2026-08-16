@@ -28,12 +28,45 @@ export default function TrainingSlideshow() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>
-            📍 Field Experience — Rajarbagh Police Headquarters
+          {/* Eyebrow: location */}
+          <span
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm mb-4"
+            style={{ background: "var(--bg-card)", color: "var(--text-muted)", borderColor: "var(--border-color)" }}
+          >
+            📍 Rajarbagh Police Lines, Dhaka
+          </span>
+
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: "var(--text-primary)" }}>
+            Field Experience: Assistant Trainer
           </h2>
-          <p style={{ color: "var(--text-muted)" }}>
-            40-Day Assistant Trainer | Computer Hardware & Networking
-          </p>
+
+          {/* Detail pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span
+              style={{
+                background: "rgba(124,58,237,0.15)",
+                color: "var(--accent-purple)",
+                borderRadius: "999px",
+                padding: "4px 12px",
+                fontSize: "0.82rem",
+                fontWeight: 600,
+              }}
+            >
+              ⏱ 40 Days
+            </span>
+            <span
+              style={{
+                background: "rgba(37,99,235,0.12)",
+                color: "var(--accent-blue)",
+                borderRadius: "999px",
+                padding: "4px 12px",
+                fontSize: "0.82rem",
+                fontWeight: 600,
+              }}
+            >
+              💻 Computer Hardware &amp; Networking
+            </span>
+          </div>
         </motion.div>
 
         <motion.div

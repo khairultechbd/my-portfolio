@@ -4,7 +4,9 @@ import TrainingSlideshow from "./components/TrainingSlideshow";
 import AboutSection from "./components/AboutSection";
 import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
-import BlogSection from "./components/BlogSection";
+// BlogSection is temporarily disabled — re-enable once real posts replace the
+// "Coming Soon" placeholders (see CV/Portfolio_Improvement_Plan.md, item #9).
+// import BlogSection from "./components/BlogSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 
@@ -17,7 +19,7 @@ export default function Home() {
       <AboutSection />
       <SkillsSection />
       <ProjectsSection />
-      <BlogSection />
+      {/* <BlogSection /> */}
       <ContactSection />
       <Footer />
     </main>

@@ -17,7 +17,7 @@ export default function ContactSection() {
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\n${message}`
     );
-    window.location.href = `mailto:your.email@example.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    window.location.href = `mailto:mdkhairulislam87001@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   };
 
   return (
@@ -38,7 +38,7 @@ export default function ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -53,11 +53,11 @@ export default function ContactSection() {
               <div>
                 <p className="text-sm mb-1" style={{ color: "var(--text-muted)" }}>Email</p>
                 <a
-                  href="mailto:your.email@example.com"
+                  href="mailto:mdkhairulislam87001@gmail.com"
                   className="hover:text-blue-400 transition-colors"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  your.email@example.com
+                  mdkhairulislam87001@gmail.com
                 </a>
               </div>
             </div>

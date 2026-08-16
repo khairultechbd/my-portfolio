@@ -3,14 +3,14 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Download, Linkedin, Github, Facebook } from "lucide-react";
+import { Linkedin, Github, Facebook, ChevronDown } from "lucide-react";
 
 const titles = [
   "Network & System Engineer",
   "Network Security Enthusiast",
-  "MikroTik Specialist",
+  "MikroTik & Cisco Specialist",
+  "Windows Server & Systems Administrator",
   "Computer Hardware & Networking Engineer",
-  "CCTV Installation Specialist",
 ];
 
 export default function HeroSection() {
@@ -47,7 +47,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center pt-20 pb-12 px-6"
+      className="min-h-[90vh] flex items-center pt-20 pb-12 px-6 relative"
      style={{ background: 'var(--bg-primary)' }}>
       {/*
         .hero-grid is defined in globals.css:
@@ -67,8 +67,13 @@ export default function HeroSection() {
             order: 1,
           }}
         >
-          {/* Image wrapper — 3:4 aspect, max-height 580px, no rotation */}
+          {/* Image wrapper — 3:4 aspect, no rotation.
+              Height is capped lower on mobile (h-[280px]) than earlier —
+              the old pure-vw formula produced ~500px on a 375px phone,
+              pushing the name/title/CTA below the fold. See
+              CV/UIUX_Expert_Audit.md. */}
           <div
+            className="h-[280px] sm:h-[380px] md:h-[480px] lg:h-[580px]"
             style={{
               position: "relative",
               width: "100%",
@@ -76,13 +81,11 @@ export default function HeroSection() {
               borderRadius: "16px",
               overflow: "hidden",
               boxShadow: "0 25px 60px rgba(37, 99, 235, 0.25)",
-              /* explicit height derived from aspect-ratio so Next.js fill works */
-              height: "min(580px, calc(100vw * 4 / 3))",
               marginLeft: "auto",
             }}
           >
             <Image
-              src="/all-photo/Formal Photo/court tie body half.png"
+              src="/all-photo/Formal Photo/court-tie-body-half.jpg"
               alt="Md. Khairul Islam"
               fill
               priority
@@ -121,7 +124,10 @@ export default function HeroSection() {
             Md. Khairul Islam
           </h1>
 
-          <p className="text-xl sm:text-2xl text-blue-400 mb-1 min-h-[2.5rem]">
+          <p
+            className="text-xl sm:text-2xl mb-1 min-h-[2.5rem]"
+            style={{ color: "var(--accent-blue)" }}
+          >
             {displayText}
             <span className="animate-pulse">|</span>
           </p>
@@ -133,30 +139,20 @@ export default function HeroSection() {
           <div className="w-16 h-0.5 bg-blue-600 mb-6" />
 
           <p className="leading-relaxed mb-8 max-w-lg" style={{ color: "var(--text-muted)" }}>
-            Jr. System &amp; Network Engineer at IT Bangladesh with hands-on expertise
-            in MikroTik, Cisco, and Windows Server. Completed IsDB-BISEW&apos;s
-            competitive 6-month IT Scholarship in Network &amp; System Administration.
-            Trained 40 Days law enforcement personnel at Rajarbagh Police Headquarters.
+            Junior Network Engineer at IT Bangladesh with hands-on expertise
+            in MikroTik, Cisco, and Windows Server. Completed a competitive
+            6-month Diploma in Network System Administration through the
+            IsDB-BISEW IT Scholarship Programme. Trained 40 Days law
+            enforcement personnel at Rajarbagh Police Lines.
           </p>
 
           <div className="flex flex-wrap gap-4 mb-8">
-            <motion.a
-              href="/cv/khairul-islam-cv.pdf"
-              download
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-theme-text font-medium rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25"
-            >
-              <Download size={18} />
-              Download CV
-            </motion.a>
             <motion.button
               type="button"
               onClick={scrollToContact}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-6 py-3 font-medium rounded-lg hover:border-blue-500 hover:text-blue-400 transition-colors"
-              style={{ border: "1px solid var(--border-color)", color: "var(--text-primary)", background: "transparent" }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-theme-text font-medium rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25"
             >
               Contact Me
             </motion.button>
@@ -200,6 +196,34 @@ export default function HeroSection() {
         </motion.div>
 
       </div>
+
+      {/* Scroll-down cue — hints there's more content below on large screens,
+          where min-h-[90vh] can otherwise look like the page ends here. */}
+      <motion.button
+        type="button"
+        onClick={() => document.querySelector("#training")?.scrollIntoView({ behavior: "smooth" })}
+        aria-label="Scroll down"
+        className="hidden sm:flex"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: "absolute",
+          bottom: "24px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "40px",
+          height: "40px",
+          borderRadius: "999px",
+          border: "1px solid var(--border-color)",
+          background: "var(--bg-card)",
+          color: "var(--text-muted)",
+          cursor: "pointer",
+        }}
+      >
+        <ChevronDown size={20} />
+      </motion.button>
     </section>
   );
 }
